@@ -1,0 +1,46 @@
+Given the head of a singly linked list, return the middle node of the linked list.
+If there are two middle nodes, return the second middle node.
+Example 1:
+Input: head = [1,2,3,4,5]
+Output: [3,4,5]
+Explanation: The middle node of the list is node 3.
+Example 2:
+Input: head = [1,2,3,4,5,6]
+Output: [4,5,6]
+Explanation: Since the list has two middle nodes with values 3 and 4, we return the second one.
+
+以下是解决该问题的Java程序，使用了快慢指针的方法：
+java
+Copy code
+public ListNode middleNode(ListNode head) {
+    ListNode slow = head;
+    ListNode fast = head;
+    while (fast != null && fast.next != null) {
+        slow = slow.next;
+        fast = fast.next.next;
+    }
+    return slow;
+}
+在这个程序中，我们使用两个指针 slow 和 fast，初始时指向链表头部。我们使用快慢指针的方法遍历整个链表。慢指针 slow 每次移动一个节点，而快指针 fast 每次移动两个节点。当快指针 fast 到达链表尾部时，慢指针 slow 将指向链表的中间节点。
+如果链表有两个中间节点，慢指针 slow 将指向第一个中间节点。我们可以通过返回 slow 的下一个节点来处理这种情况，这将是第二个中间节点。
+以下是使用 middleNode 函数解决该问题的示例：
+ListNode head = new ListNode(1);
+head.next = new ListNode(2);
+head.next.next = new ListNode(3);
+head.next.next.next = new ListNode(4);
+head.next.next.next.next = new ListNode(5);
+
+ListNode middle = middleNode(head);
+while (middle != null) {
+    System.out.print(middle.val + " ");
+    middle = middle.next;
+}
+// 输出：3 4 5
+
+head.next.next.next.next.next = new ListNode(6);
+middle = middleNode(head);
+while (middle != null) {
+    System.out.print(middle.val + " ");
+    middle = middle.next;
+}
+// 输出：4 5 6
